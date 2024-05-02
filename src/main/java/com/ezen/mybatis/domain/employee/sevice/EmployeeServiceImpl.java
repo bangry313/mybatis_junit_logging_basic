@@ -9,7 +9,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // 프리젠테이션 레이어에서 사용 가능한 비즈니스 메서드 제공 (비즈니스 객체)
 public class EmployeeServiceImpl {
@@ -55,12 +57,90 @@ public class EmployeeServiceImpl {
         return employee;
     }
 
+    // 급여 범위로 사원 조회
+    public List<Employee> getEmployeesBySaley(Map<String, Integer> params){
+        List<Employee> list = null;
+        SqlSession sqlSession = null;
+        try {
+            sqlSession  = getSqlSessionFactory().openSession();
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            list = employeeMapper.findBySalaryRange(params);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            sqlSession.close();
+        }
+        return list;
+    }
+
+    // 급여 범위로 사원 조회
+    public List<Employee> getEmployeesBySaley2(int min, int max){
+        List<Employee> list = null;
+        SqlSession sqlSession = null;
+        try {
+            sqlSession  = getSqlSessionFactory().openSession();
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            list = employeeMapper.findBySalaryRange2(min, max);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            sqlSession.close();
+        }
+        return list;
+    }
+
+    // 부서명 포함 사원상세정보 조회
+    public List<Map<String, Object>> getEmployeesByJoin(){
+        List<Map<String, Object>> list = null;
+        SqlSession sqlSession = null;
+        try {
+            sqlSession  = getSqlSessionFactory().openSession();
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            list = employeeMapper.findByJoin();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            sqlSession.close();
+        }
+        return list;
+    }
+
+    // 사원 급여 정보 수정
+    public void updateSalary(int employeeId, int salary){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession  = getSqlSessionFactory().openSession(false);
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+
+            Employee employee = new Employee();
+            employee.setId(employeeId);
+            employee.setSalary(salary);
+            employeeMapper.update(employee);
+            sqlSession.commit();
+        } catch (IOException e) {
+            sqlSession.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+
     public static void main(String[] args) {
         EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
 //        List<Employee> list = employeeService.getEmployees();
 //        System.out.println(list);
-        Employee employee = employeeService.getEmployee(101);
+        Employee employee = employeeService.getEmployee(100);
         System.out.println(employee);
+//        Map<String, Integer> params = new HashMap<>();
+//        params.put("min", 2000);
+//        params.put("max", 3000);
+//        List<Employee> list = employeeService.getEmployeesBySaley2(2000, 3000);
+//        System.out.println(list);
+//        System.out.println(employeeService.getEmployeesByJoin());
+
+//        employeeService.updateSalary(100, 500);
+//        System.out.println("수정 완료...");
     }
 
 }
