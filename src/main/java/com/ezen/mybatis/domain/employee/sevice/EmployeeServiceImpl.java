@@ -3,14 +3,8 @@ package com.ezen.mybatis.domain.employee.sevice;
 import com.ezen.mybatis.domain.common.SqlSessionFactoryBean;
 import com.ezen.mybatis.domain.employee.dto.Employee;
 import com.ezen.mybatis.domain.employee.mapper.EmployeeMapper;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import java.io.IOException;
-import java.io.Reader;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,10 +92,10 @@ public class EmployeeServiceImpl {
             sqlSession  = sqlSessionFactory.openSession(false);
             EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
 
-            Employee employee = new Employee();
-            employee.setId(employeeId);
-            employee.setSalary(salary);
-            employeeMapper.update(employee);
+//            Employee employee = new Employee();
+//            employee.setId(employeeId);
+//            employee.setSalary(salary);
+//            employeeMapper.update(employee);
             sqlSession.commit();
         } finally {
             sqlSession.close();
@@ -157,9 +151,9 @@ public class EmployeeServiceImpl {
 //        employee.setId(100);
 //        employee.setSalary(10000);
 //        employee.setFirstName("killer");
-            Employee employee = Employee
-                .builder()
-                .id(100).salary(500).firstName("xxx").build();
+//            Employee employee = Employee
+//                .builder()
+//                .id(100).salary(500).firstName("xxx").build();
 //        employeeService.updateEmployee(employee);
 //        System.out.println("수정 완료");
 

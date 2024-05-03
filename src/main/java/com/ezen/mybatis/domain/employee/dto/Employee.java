@@ -2,8 +2,12 @@ package com.ezen.mybatis.domain.employee.dto;
 
 import lombok.*;
 
-@Data
-@Builder
+//@Data
+//@Builder
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 public class Employee {
 	private int id;
 	private String firstName;

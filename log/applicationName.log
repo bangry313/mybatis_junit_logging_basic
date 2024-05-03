@@ -1,0 +1,9 @@
+[2024-05-03 12:49:39][main][DEBUG](LogbackExample.java:12) : 디버깅 메시지
+[2024-05-03 12:49:39][main][INFO ](LogbackExample.java:13) : 정보 메시지
+[2024-05-03 12:49:39][main][WARN ](LogbackExample.java:14) : 경고 메시지
+[2024-05-03 12:49:39][main][ERROR](LogbackExample.java:15) : 치명적 에러 메시지
+[2024-05-03 12:53:18][main][TRACE](LogbackExample.java:11) : 재잘재잘 메시지
+[2024-05-03 12:53:18][main][DEBUG](LogbackExample.java:12) : 디버깅 메시지
+[2024-05-03 12:53:18][main][INFO ](LogbackExample.java:13) : 정보 메시지
+[2024-05-03 12:53:18][main][WARN ](LogbackExample.java:14) : 경고 메시지
+[2024-05-03 12:53:18][main][ERROR](LogbackExample.java:15) : 치명적 에러 메시지

@@ -4,6 +4,7 @@
 <configuration scan="true" scanPeriod="30 seconds">
 	<!-- 로그 파일 저장 패스 -->
 	<property name="LOGS_ABSOLUTE_PATH" value="./log" />
+
 	<!-- 로그 메시지 출력 형식 설정 -->
 	<property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}][%thread][%-5level]\(%F:%L\) : %msg%n" />
 
@@ -25,7 +26,7 @@
 		</encoder>
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- 시간으로 파일 분할 정책 -->
-			<fileNamePattern>${LOGS_ABSOLUTE_PATH}/application.%d{yyyy-MM-dd}.%i.log </fileNamePattern> <!-- 분할 파일 이름 패턴 -->
+			<fileNamePattern>${LOGS_ABSOLUTE_PATH}/mybatis.%d{yyyy-MM-dd}.%i.log </fileNamePattern> <!-- 분할 파일 이름 패턴 -->
 			<timeBasedFileNamingAndTriggeringPolicy
 				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>10MB</maxFileSize> <!-- 분할 파일 크기 기준 -->
@@ -37,7 +38,7 @@
 	<!-- Logger 설정 -->
 	<root level="debug">
 		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="FILE" />
+<!--		<appender-ref ref="FILE" />-->
 	</root>
 
 </configuration>
