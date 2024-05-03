@@ -140,7 +140,7 @@
 	</update>
 
 	<!-- 사원 정보 수정(set, if 태그를 이용한 동적 SQL) -->
-	<update id="update2" parameterType="Employee">
+	<update id="dynamicUpdate" parameterType="Employee">
 		UPDATE employees
 		<set>
 	        <if test="firstName != null">first_name = #{firstName},</if>
@@ -155,23 +155,23 @@
 		DELETE FROM employees
 		WHERE  employee_id = #{value}
 	</delete>
-<!--	-->
-<!--	&lt;!&ndash; 동적 SQL &ndash;&gt;-->
-<!--	<select id="search" parameterType="map" resultType="Employee">-->
-<!--		SELECT employee_id  "id", -->
-<!--		       first_name   "firstName", -->
-<!--		       salary-->
-<!--		FROM   employees-->
-<!--		<if test="type != null">-->
-<!--			<choose>-->
-<!--				<when test="type == 'id'">-->
-<!--				WHERE employee_id = #{value}-->
-<!--				</when>-->
-<!--				<when test="type == 'name'">-->
-<!--				WHERE first_name like #{value}-->
-<!--				</when>-->
-<!--				<otherwise></otherwise>-->
-<!--			</choose>-->
-<!--		</if>-->
-<!--	</select>-->
+
+	<!-- 동적 SQL -->
+	<select id="search"  resultType="Employee">
+		SELECT employee_id  "id",
+		       first_name   "firstName",
+		       salary
+		FROM   employees
+		<if test="type != null">
+			<choose>
+				<when test="type == 'id'">
+				WHERE employee_id = #{value}
+				</when>
+				<when test="type == 'name'">
+				WHERE first_name like #{value}
+				</when>
+				<otherwise></otherwise>
+			</choose>
+		</if>
+	</select>
 </mapper>

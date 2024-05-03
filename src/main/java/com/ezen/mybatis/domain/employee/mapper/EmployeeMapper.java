@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 // JDBC 구현 시 Dao 인터페이스에 해당
 public interface EmployeeMapper {
@@ -22,4 +21,9 @@ public interface EmployeeMapper {
     public List<Employee> findBySalaryRange2(@Param("min") Integer min,  @Param("max") Integer max);
 
     public List<Map<String, Object>> findByJoin();
+
+    public void dynamicUpdate(Employee employee);
+
+    public List<Employee> search(@Param("type") String type,  @Param("value") String value);
+
 }
